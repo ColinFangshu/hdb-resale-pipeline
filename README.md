@@ -5,6 +5,7 @@ A Python (pandas) ETL pipeline that extracts HDB resale flat prices from [data.g
 - **Run it:** `hdb_resale_pipeline.ipynb`. It runs top to bottom, with commentary and saved outputs.
 - **Findings and assumptions:** [`REPORT.md`](REPORT.md)
 - **Logic:** `src/hdb_pipeline/`. One module per stage, each covered by unit tests.
+- **Part 2, AWS architecture:** [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md), with diagrams in `docs/architecture/` (PNG plus editable draw.io).
 
 ---
 
@@ -94,6 +95,9 @@ Row counts are checked automatically: `raw in scope = cleaned + quarantined`, an
 │   ├── hashing.py              # HMAC-SHA256 de-identification
 │   └── io.py                   # writes output groups (Parquet + CSV)
 ├── tests/                      # pytest unit tests, one file per stage
+├── docs/
+│   ├── ARCHITECTURE.md         # Part 2: ingestion & exploitation architecture on AWS
+│   └── architecture/           # diagrams: .png (submission) + .drawio (editable)
 └── data/
     ├── raw/                    # source files as published + _manifest.json (committed)
     ├── staging/                # intermediate master dataset (regenerated, not committed)
