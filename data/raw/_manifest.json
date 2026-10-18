@@ -1,0 +1,100 @@
+[
+  {
+    "dataset_id": "d_43f493c6c50d54243cc1eab0df142d6a",
+    "name": "Resale Flat Prices (Based on Approval Date), 2000 - Feb 2012",
+    "coverage_start": "2000-01",
+    "coverage_end": "2012-02",
+    "source_last_updated": "2024-08-28T14:06:52+08:00",
+    "downloaded_at_utc": "2026-10-15T14:13:53+00:00",
+    "file": "d_43f493c6c50d54243cc1eab0df142d6a.csv",
+    "bytes": 29369945,
+    "sha256": "5f6a72bd7b9120281863beb1fc4c89aa5f4923f00b0f6c52494c4347363f2c36",
+    "row_count": 369651,
+    "columns": [
+      "month",
+      "town",
+      "flat_type",
+      "block",
+      "street_name",
+      "storey_range",
+      "floor_area_sqm",
+      "flat_model",
+      "lease_commence_date",
+      "resale_price"
+    ]
+  },
+  {
+    "dataset_id": "d_2d5ff9ea31397b66239f245f57751537",
+    "name": "Resale Flat Prices (Based on Registration Date), From Mar 2012 to Dec 2014",
+    "coverage_start": "2012-03",
+    "coverage_end": "2014-12",
+    "source_last_updated": "2024-08-28T13:56:45+08:00",
+    "downloaded_at_utc": "2026-10-15T14:14:01+00:00",
+    "file": "d_2d5ff9ea31397b66239f245f57751537.csv",
+    "bytes": 4160771,
+    "sha256": "6a16e2dc78f70048ec1a522b59a9727581c36e45e02022641c53e755a7657c72",
+    "row_count": 52203,
+    "columns": [
+      "month",
+      "town",
+      "flat_type",
+      "block",
+      "street_name",
+      "storey_range",
+      "floor_area_sqm",
+      "flat_model",
+      "lease_commence_date",
+      "resale_price"
+    ]
+  },
+  {
+    "dataset_id": "d_ea9ed51da2787afaf8e51f827c304208",
+    "name": "Resale Flat Prices (Based on Registration Date), From Jan 2015 to Dec 2016",
+    "coverage_start": "2015-01",
+    "coverage_end": "2016-12",
+    "source_last_updated": "2024-08-28T13:41:10+08:00",
+    "downloaded_at_utc": "2026-10-15T14:14:18+00:00",
+    "file": "d_ea9ed51da2787afaf8e51f827c304208.csv",
+    "bytes": 3070924,
+    "sha256": "4ff7ce4a4f642fb384d2b75a42e75b0477e50005f4aaa9989591a7a92507d185",
+    "row_count": 37153,
+    "columns": [
+      "month",
+      "town",
+      "flat_type",
+      "block",
+      "street_name",
+      "storey_range",
+      "floor_area_sqm",
+      "flat_model",
+      "lease_commence_date",
+      "remaining_lease",
+      "resale_price"
+    ]
+  },
+  {
+    "dataset_id": "d_8b84c4ee58e3cfc0ece0d773c8ca6abc",
+    "name": "Resale flat prices based on registration date from Jan-2017 onwards",
+    "coverage_start": "2017-01",
+    "coverage_end": "2026-10",
+    "source_last_updated": "2026-10-18T02:10:18+08:00",
+    "downloaded_at_utc": "2026-10-18T09:05:14+00:00",
+    "file": "d_8b84c4ee58e3cfc0ece0d773c8ca6abc.csv",
+    "bytes": 24032414,
+    "sha256": "d401fc2e7d2a083576dd388b5ea3d170c2027d2503542de32a84656651ebe947",
+    "row_count": 242955,
+    "columns": [
+      "month",
+      "town",
+      "flat_type",
+      "block",
+      "street_name",
+      "storey_range",
+      "floor_area_sqm",
+      "flat_model",
+      "lease_commence_date",
+      "remaining_lease",
+      "resale_price"
+    ]
+  }
+]

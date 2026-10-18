@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hdb-pipeline"
+version = "0.1.0"
+description = "ETL pipeline for HDB resale flat prices (Jan 2012 - Dec 2017)"
+requires-python = ">=3.10"
+dependencies = [
+    "pandas>=2.0",
+    "requests>=2.31",
+    "PyYAML>=6.0",
+    "pyarrow>=14",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "jupyter", "nbformat"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

@@ -1,0 +1,71 @@
+# Pipeline configuration — every tunable value lives here, not in code.
+
+source:
+  collection_id: "189"                      # data.gov.sg "Resale Flat Prices" collection
+  metadata_base_url: "https://api-production.data.gov.sg/v2/public/api"
+  download_base_url: "https://api-open.data.gov.sg/v1/public/api"
+  api_key_env_var: "DATA_GOV_SG_API_KEY"    # optional; raises rate limits if set
+
+scope:
+  start_month: "2012-01"                    # inclusive
+  end_month: "2017-12"                      # inclusive
+
+http:
+  timeout_seconds: 60
+  max_retries: 5
+  backoff_seconds: 2                        # exponential: 2, 4, 8, ...
+  poll_interval_seconds: 3
+  poll_max_attempts: 20
+  chunk_size_bytes: 1048576                 # 1 MiB streaming chunks
+
+standardise:
+  # column -> pandas dtype. float for price: some resale prices carry cents (e.g. 888888.88)
+  numeric_columns:
+    floor_area_sqm: "Float64"
+    lease_commence_date: "Int64"
+    resale_price: "Float64"
+
+validation:
+  reference_month: "2012-01"                # the strict authoritative set
+  domain_columns: ["town", "flat_type", "flat_model", "storey_range"]
+
+enrich:
+  lease_years: 99
+  lease_as_of: "2027-01-01"
+  anomaly:
+    z_threshold: 3.5                        # Iglewicz & Hoaglin cut-off for robust z-scores
+    min_peer_size: 20                       # fall back to a wider peer group below this
+    # Never drop flat_model: rare genuine homes (e.g. Terrace) must be compared with their own kind
+    peer_levels:                            # most specific first
+      - ["town", "flat_type", "flat_model", "lease_decade", "sale_year"]
+      - ["town", "flat_type", "flat_model", "sale_year"]            # drop lease age before town
+      - ["flat_type", "flat_model", "sale_year"]
+      - ["flat_type", "flat_model"]           # rare models (e.g. Terrace) across all years
+      - ["flat_type"]
+    bounds:                                 # hard plausibility limits (SGD)
+      price_min: 50000
+      price_max: 3000000
+      ppsm_min: 1000
+      ppsm_max: 20000
+
+transform:
+  prefix: "S"
+  avg_price_group: ["month", "town", "flat_type"]
+  sequence_width: 3                         # suffix 001-999; largest collision group today is 14
+  sequence_order: ["storey_range", "floor_area_sqm", "resale_price", "lease_commence_date",
+                   "flat_model", "street_name", "_source_dataset_id", "_source_row"]
+
+hashing:
+  key_env_var: "HDB_HASH_KEY"               # the secret key is read from here, never from this file
+  min_key_length: 32
+  allow_demo_key: true                      # reviewer convenience only; set false in production
+  demo_key: "DEMO-KEY-NOT-SECRET-do-not-use-in-production"
+
+paths:
+  raw: "data/raw"
+  manifest: "data/raw/_manifest.json"
+  staging: "data/staging"
+  cleaned: "data/cleaned"
+  quarantined: "data/quarantined"
+  transformed: "data/transformed"
+  hashed: "data/hashed"
